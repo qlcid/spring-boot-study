@@ -35,7 +35,9 @@ public class ProductService {
 
     public ProductDto.ProductDetailDto getProduct(long id) {
         // todo
-        return null;
+        Product product = productRepository.getOne(id);
+
+        return ProductDto.ProductDetailDto.valueOf(product);
     }
 
     public void deleteProduct(final String id) {

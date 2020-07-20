@@ -19,7 +19,6 @@ public class ProductController {
     @GetMapping("")
     public List<ProductDto.ProductDetailDto> getProductList() {
         return productService.getProductList();
-
     }
 
     // 등록(생성)

@@ -40,11 +40,12 @@ public class ProductService {
         return ProductDto.ProductDetailDto.valueOf(product);
     }
 
-    public void deleteProduct(final String id) {
+    public void deleteProduct(final long id) {
         // todo
+        productRepository.deleteById(id);
     }
 
-    public ProductDto.ProductDetailDto updateProduct(final String id, final ProductDto.ProductUpdateDto updateDto) {
+    public ProductDto.ProductDetailDto updateProduct(final long id, final ProductDto.ProductUpdateDto updateDto) {
         // todo
         return null;
     }

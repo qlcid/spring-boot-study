@@ -35,13 +35,14 @@ public class ProductController {
 
     // 삭제
     @DeleteMapping("/{id}")
-    public void deleteProduct(@PathVariable("id") final String id) {
+    public void deleteProduct(@PathVariable("id") final long id) {
         productService.deleteProduct(id);
+        System.out.println("삭제 OK!");
     }
 
     // 업데이트
     @PutMapping("/{id}")
-    public ProductDto.ProductDetailDto updateProduct(@PathVariable("id") final String id,
+    public ProductDto.ProductDetailDto updateProduct(@PathVariable("id") final long id,
                                                      @RequestBody final ProductDto.ProductUpdateDto updateDto
     ) {
         return productService.updateProduct(id, updateDto);

@@ -35,7 +35,9 @@ public class ProductService {
 
     public ProductDto.ProductDetailDto getProduct(long id) {
         // todo
-        Product product = productRepository.getOne(id);
+//        Product product = productRepository.getOne(id);
+        Product product = productRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("해당 상품이 없습니다. id=" + id));
 
         return ProductDto.ProductDetailDto.valueOf(product);
     }
@@ -43,10 +45,16 @@ public class ProductService {
     public void deleteProduct(final long id) {
         // todo
         productRepository.deleteById(id);
+        // 해당 id가 없을 경우?
     }
 
     public ProductDto.ProductDetailDto updateProduct(final long id, final ProductDto.ProductUpdateDto updateDto) {
         // todo
-        return null;
+        Product product = productRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("해당 상품이 없습니다. id=" + id));
+        product.setPrice(updateDto.getPrice());
+        productRepository.save(product);
+
+        return ProductDto.ProductDetailDto.valueOf(product);
     }
 }

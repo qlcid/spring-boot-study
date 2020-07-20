@@ -1,52 +1,51 @@
 package com.study.yeseul.product.controller;
 
-import com.study.yeseul.product.model.ProductModel;
+import com.study.yeseul.product.domain.Product;
+import com.study.yeseul.product.service.ProductService;
 import com.study.yeseul.product.vo.ProductDto;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/products")
 public class ProductController {
 
+    // spring 생성자 주입하는 방법이
+    @Autowired
+    private ProductService productService;
+
+    @GetMapping("")
+    public List<ProductDto.ProductDetailDto> getProductList() {
+        return productService.getProductList();
+
+    }
+
     // 등록(생성)
     @PostMapping("")
-    public ProductModel createProduct(@RequestBody ProductDto.ProductCreateDto createDto) {
-
-        ProductModel productModel = new ProductModel();
-        productModel.setId((long) (Math.random() * 100));
-        productModel.setName(createDto.getName());
-        productModel.setPrice(createDto.getPrice());
-        productModel.setVender(createDto.getVender());
-
-        System.out.println("상품을 등록 하였습니다.");
-
-        return productModel;
+    public Product createProduct(@RequestBody final ProductDto.ProductCreateDto createDto) {
+        return productService.createProduct(createDto);
     }
 
     // 조회
     @GetMapping("/{id}")
     public ProductDto.ProductDetailDto getProduct(@PathVariable("id") final long id) {
-        System.out.println(">>>>> id : " + id);
-
-        ProductDto.ProductDetailDto productDetailDto = new ProductDto.ProductDetailDto();
-        productDetailDto.setId(id);
-        productDetailDto.setName("HP ProDesk 280 G2 6세대i5 탑재 램8G SSD 256G 정품 윈도우10");
-        productDetailDto.setPrice(349000);
-        productDetailDto.setVender("(주)스마트닷컴");
-
-        return productDetailDto;
+        return productService.getProduct(id);
     }
 
     // 삭제
     @DeleteMapping("/{id}")
-    public String deleteProduct(@PathVariable("id") final String id) {
-        return id + " 상품을 삭제 하였습니다.";
+    public void deleteProduct(@PathVariable("id") final String id) {
+        productService.deleteProduct(id);
     }
 
     // 업데이트
     @PutMapping("/{id}")
-    public String updateProduct(@PathVariable("id") final String id) {
-        return id + " 상품을 수정 하였습니다.";
+    public ProductDto.ProductDetailDto updateProduct(@PathVariable("id") final String id,
+                                                     @RequestBody final ProductDto.ProductUpdateDto updateDto
+    ) {
+        return productService.updateProduct(id, updateDto);
     }
 
 }

@@ -1,0 +1,97 @@
+- controller : API 입구
+ . api 정의하고, 입력값 벨리데이션(유효성) 체크 -> 가격 9조9천억 -> 에러 발생. 상품명은 영어만 할수있게 체크 한다던가
+- service : 비지니스 로직 처리
+ . 상품등록 할 때, 외국사용자도 등록할수 있고, 한국사용자도 등록할수 있다고 가정하면...
+ . 입력값에 price라고 있으면... 1200, 1
+  .. price
+  .. currency
+
+김예슬
+. price : 1200
+. currency : KRW
+
+에디킴
+. price : 1
+. currency : USD
+
+
+service에서 환율을 계산을 한다. 한화 기준으로
+int price = 0;
+if ("USD".equals(currency)) {
+    price = createDto.getPrice() * 1200;
+
+} else if ("KRW".equals(currency)) {
+    price = createDto.getPrice();
+}
+
+createDto.setPrice(price);
+productRepository.save(createDto);
+
+
+DB에는 뭘로 입력을 해야할까?
+
+- dao(repostory) : DB access
+ .
+
+상품 API
+http://localhost:8080/products/~~~~
+
+주문 API
+- 주문 목록 조회      : GET       http://localhost:8080
+- 주문 상세 조회      : GET       http://localhost:8080/{id}
+- 주문 삭제(탈퇴)     : DELETE    http://localhost:8080/{id}
+- 주문 수정           : PUT       http://localhost:8080/{id}
+- 주문 생성(요청)     : POST      http://localhost:8080
+
+order 이라는 테이블명은 사용할 수 없다.
+굳이 사용하려면 할수있는 방법은 있지만, 중요한건 아니니 패스하는걸루
+
+
+Builder 패턴 시간날때 한번 보기~
+
+stream 익숙해지면 좋음
+
+http://localhost:8080/orders
+
+yml -> "야믈"
+
+테이블
+- 상품
+ . id
+ . name
+ . price
+ . vender
+- 주문
+ . id
+ . 상품번호(상품ID) : id
+ . 주문날짜 : createdAt
+ . 주문한 사람이름 : userName
+ . 개수 : count
+
+
+DB뿐만 아니라 모든 미들웨어에 포함된다.
+WAS -> tomcat, jboss, ~~~~
+
+2주차
+개발툴 선정 및 설명
+백엔드 어플리케이션 개발환경 구성
+
+3주차
+Rest API 이해 및 실습
+
+4주차
+테스트 코드 작성 실습
+어플리케이션 배포 실습
+
+5주차
+Message Broker 이해 및 실습
+
+6주차
+MSA 이해
+Spring Cloud Nexflix를 이용한 MSA 실습
+
+7주차
+Spring Cloud Nexflix를 이용한 MSA 실습
+
+8주차
+멘토링 종료 및 활동 피드백

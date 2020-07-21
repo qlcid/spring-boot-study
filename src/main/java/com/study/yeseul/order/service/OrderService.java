@@ -6,11 +6,22 @@ import com.study.yeseul.order.vo.OrderDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 @Service
 public class OrderService {
 
     @Autowired
     private OrderRepository orderRepository;
+
+    public List<OrderDto.OrderDetailDto> getOrderList() {
+        List<Order> orderList = orderRepository.findAll();
+
+        return orderList.stream()
+                .map(OrderDto.OrderDetailDto::valueOf)
+                .collect(Collectors.toList());
+    }
 
     public Order createOrder(final long productId, final OrderDto.OrderCreateDto createDto) {
         return orderRepository.save(Order.valueOf(productId, createDto));
@@ -21,5 +32,9 @@ public class OrderService {
                 .orElseThrow(() -> new IllegalArgumentException("해당 상품이 없습니다. id=" + id));
 
         return OrderDto.OrderDetailDto.valueOf(order);
+    }
+
+    public void deleteOrder(final long id) {
+        orderRepository.deleteById(id);
     }
 }

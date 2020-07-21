@@ -6,6 +6,8 @@ import com.study.yeseul.order.vo.OrderDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/orders")
 public class OrderController {
@@ -15,8 +17,8 @@ public class OrderController {
 
     // 주문 목록 조회
     @GetMapping("")
-    public String getOrderList() {
-        return "";
+    public List<OrderDto.OrderDetailDto> getOrderList() {
+        return orderService.getOrderList();
     }
 
     // 주문 생성
@@ -34,7 +36,7 @@ public class OrderController {
 
     // 주문 삭제
     @DeleteMapping("/{id}")
-    public void deleteOrder() {
-
+    public void deleteOrder(@PathVariable("id") final long id) {
+        orderService.deleteOrder(id);
     }
 }

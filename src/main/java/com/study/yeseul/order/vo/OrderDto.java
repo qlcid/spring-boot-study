@@ -10,14 +10,13 @@ import java.time.ZonedDateTime;
 public class OrderDto {
 
     @Getter
-    @Setter
     public static class OrderCreateDto {
+        private long productId;
         private String userName;
         private int count;
     }
 
     @Getter
-    @Setter
     @AllArgsConstructor
     public static class OrderDetailDto {
         private long id;

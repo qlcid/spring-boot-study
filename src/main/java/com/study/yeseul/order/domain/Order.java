@@ -35,9 +35,9 @@ public class Order {
     @Column(updatable = false)
     private int count;
 
-    public static Order valueOf(long productId, OrderDto.OrderCreateDto orderCreateDto) {
+    public static Order valueOf(OrderDto.OrderCreateDto orderCreateDto) {
         return new Order(
-                productId,
+                orderCreateDto.getProductId(),
                 orderCreateDto.getUserName(),
                 orderCreateDto.getCount()
         );

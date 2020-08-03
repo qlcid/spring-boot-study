@@ -29,6 +29,7 @@ class ProductServiceTest {
 
     @Test
     void createProduct() {
+        // createProduct
         ProductDto.ProductCreateDto createDto = ProductDto.ProductCreateDto.builder()
                 .name("aaa")
                 .price(10000)

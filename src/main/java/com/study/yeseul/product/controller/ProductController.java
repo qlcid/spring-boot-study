@@ -6,6 +6,7 @@ import com.study.yeseul.product.vo.ProductDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -23,7 +24,7 @@ public class ProductController {
 
     // 등록(생성)
     @PostMapping("")
-    public Product createProduct(@RequestBody final ProductDto.ProductCreateDto createDto) {
+    public Product createProduct(@RequestBody @Valid final ProductDto.ProductCreateDto createDto) {
         return productService.createProduct(createDto);
     }
 

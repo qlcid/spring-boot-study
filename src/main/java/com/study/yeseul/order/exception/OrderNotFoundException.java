@@ -1,8 +1,8 @@
 package com.study.yeseul.order.exception;
 
-import com.study.yeseul.error.exception.EntityNotFoundException;
+import com.study.yeseul.error.exception.NotFoundException;
 
-public class OrderNotFoundException extends EntityNotFoundException {
+public class OrderNotFoundException extends NotFoundException {
 
     public OrderNotFoundException(Long id) {
         super(id + " is not found");

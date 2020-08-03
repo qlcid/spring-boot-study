@@ -7,7 +7,6 @@ import com.study.yeseul.product.vo.ProductDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.persistence.EntityNotFoundException;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -32,6 +31,17 @@ public class ProductService {
     }
 
     public Product createProduct(final ProductDto.ProductCreateDto createDto) {
+        if("aaa".equals(createDto.getName())) {
+            // todo
+            int price = (int) (createDto.getPrice() * 0.9);
+            createDto.setPrice(price);
+
+        } else if("bbb".equals(createDto.getName())) {
+            // todo
+            int price = (int) (createDto.getPrice() * 0.5);
+            createDto.setPrice(price);
+        }
+
         return productRepository.save(Product.valueOf(createDto));
     }
 

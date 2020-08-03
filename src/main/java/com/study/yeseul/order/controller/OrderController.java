@@ -22,10 +22,9 @@ public class OrderController {
     }
 
     // 주문 생성
-    @PostMapping("/{productId}")
-    public Order createOrder(@PathVariable("productId") final long productId,
-                             @RequestBody final OrderDto.OrderCreateDto createDto) {
-        return orderService.createOrder(productId, createDto);
+    @PostMapping("")
+    public Order createOrder(@RequestBody final OrderDto.OrderCreateDto createDto) {
+        return orderService.createOrder(createDto);
     }
 
     // 주문 상세 조회

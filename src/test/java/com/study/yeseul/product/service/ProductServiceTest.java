@@ -5,15 +5,17 @@ import com.study.yeseul.product.domain.Product;
 import com.study.yeseul.product.vo.ProductDto;
 import org.junit.Before;
 import org.junit.jupiter.api.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.junit.MockitoJUnitRunner;
+import org.mockito.junit.jupiter.MockitoExtension;
+
+import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.BDDMockito.given;
 
-@RunWith(MockitoJUnitRunner.class)
-//@ActiveProfiles(TestProfile.TEST)
+@ExtendWith(MockitoExtension.class)
 class ProductServiceTest {
 
     @InjectMocks
@@ -29,12 +31,13 @@ class ProductServiceTest {
 
     @Test
     void createProduct() {
-        // createProduct
         ProductDto.ProductCreateDto createDto = ProductDto.ProductCreateDto.builder()
                 .name("aaa")
                 .price(10000)
                 .vender("apple")
                 .build();
+        given(productRepository.findById(1L)).willReturn(Optional.of(Product.valueOf(createDto)));
+
         Product product = productService.createProduct(createDto);
         assertThat(product).isNotNull();
 

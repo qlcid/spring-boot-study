@@ -2,10 +2,8 @@ package com.study.yeseul.product.vo;
 
 
 import com.study.yeseul.product.domain.Product;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
+import org.hibernate.validator.constraints.Length;
 
 import javax.validation.constraints.Max;
 
@@ -14,11 +12,15 @@ public class ProductDto {
     @Getter
     @Setter
     @Builder
+    @NoArgsConstructor
+    @AllArgsConstructor
     public static class ProductCreateDto {
-        @Max(10)
+        @Length(max = 10)
         private String name;
+
         private int price;
-        @Max(10)
+
+        @Length(max = 10)
         private String vender;
     }
 

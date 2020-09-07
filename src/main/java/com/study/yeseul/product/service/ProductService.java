@@ -7,6 +7,7 @@ import com.study.yeseul.product.vo.ProductDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -18,16 +19,17 @@ public class ProductService {
 
 
     public List<ProductDto.ProductDetailDto> getProductList() {
-        List<Product> productList = productRepository.findAll();
+//        List<Product> productList = productRepository.findAll();
 //        List<ProductDto.ProductDetailDto> resultList = new ArrayList<>();
 //        for (Product product : productList) {
 //            resultList.add(ProductDto.ProductDetailDto.valueOf(product));
 //        }
 //        return resultList;
 
-        return productList.stream()
-                .map(ProductDto.ProductDetailDto::valueOf)
-                .collect(Collectors.toList());
+//        return productList.stream()
+//                .map(ProductDto.ProductDetailDto::valueOf)
+//                .collect(Collectors.toList());
+        return Collections.emptyList();
     }
 
     public Product createProduct(final ProductDto.ProductCreateDto createDto) {

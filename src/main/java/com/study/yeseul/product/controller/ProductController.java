@@ -4,11 +4,13 @@ import com.study.yeseul.product.domain.Product;
 import com.study.yeseul.product.service.ProductService;
 import com.study.yeseul.product.vo.ProductDto;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
 
+@Validated
 @RestController
 @RequestMapping("/products")
 public class ProductController {
